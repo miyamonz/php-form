@@ -1,3 +1,10 @@
+<?php
+session_start();
+require_once(__DIR__ . "/"."util/util.php");
+//$aboutVals
+//$kikkakeKoumoku
+
+?>
 
 <!DOCTYPE html>
 <html lang="ja">
@@ -6,70 +13,81 @@
     <title>お問い合わせフォーム</title>
   </head>
   <body>
-    <form action="form.php" method="post">
+    <form class="h-adr" action="form.php" method="post">
       ※ は必須項目です
-      <ul>
-        <li>名前 ※：<input type="text" name="person_name"></li>
-        <li>ふりがな ※：<input type="text" name="person_furigana"></li>
-        <li>メールアドレス ※：<input type="text" name="email"></li>
-        <li>メールアドレス(確認) ※：<input type="text" name="email2"></li>
-        <li>会社名 ※ <input type="text" name="company_name"></li>
-        <li>役職
-          <select name="company_pos">
-            <option value="">...</option>
-          </select>
-        </li>
-        <li>業種
-          <select name="company_business">
-            <option value="">...</option>
-          </select>
-        </li>
-        <li>職種
-          <select name="job_category">
-            <option value="">...</option>
-          </select>
-        </li>
+      <table>
+        <tr><td>名前 ※：</td><td><input type="text" name="person_name"></td></tr>
+        <tr><td>ふりがな ※：</td><td><input type="text" name="person_furigana"></td></tr>
+        <tr><td>メールアドレス ※：</td><td><input type="text" name="email1"></td></tr>
+        <tr><td>メールアドレス(確認) ※：</td><td><input type="text" name="email2"></td></tr>
+        <tr><td>会社名 ※</td><td><input type="text" name="company_name"></td></tr>
+        <tr><td>役職</td>
+          <td>
+            <select name="company_pos">
+              <option value="">...</option>
+            </select>
+          </td>
+        </tr>
+        <tr><td>業種</td>
+          <td>
+            <select name="company_business">
+              <option value="">...</option>
+            </select>
+          </td>
+        </tr>
+        <tr><td>職種</td>
+          <td>
+            <select name="job_category">
+              <option value="">...</option>
+            </select>
+          </td>
+        </tr>
+        <!-- 郵便番号-->
+        <input type="hidden" class="p-country-name" value="Japan">
+        <tr> 
+          <td>郵便番号 ※：</td>
+          <td>
+            <input class="p-postal-code" type="text" size="3" maxlength="3" name="zip1" placeholder="012"> -
+            <input class="p-postal-code" type="text" size="4" maxlength="4" name="zip2" placeholder="3456">
+          </td>
+        </tr>
+        <tr><td>都道府県 ※：</td><td><input    class="p-region"           type="text" name="prefecture" placeholder=""></td></tr>
+        <tr><td>市区町村 ※：</td><td><input    class="p-locality"         type="text" name="city"       placeholder=""></td></tr>
+        <tr><td>住所1(番地) ※：</td><td><input class="p-street-address"   type="text" name="address1"></td></tr>
+        <tr><td>住所2(建物名)：</td><td><input class="p-extended-address" type="text" name="address2"></td></tr>
         <br>
-        <li>
-          郵便番号 ※：<input type="text" name="zip" placeholder="012-3456">
-          <a href="">郵便番号から住所を入力</a>
-        </li>
-        <li>
-          都道府県 ※：
-          <select name="prefecture">
-            <option value="">選択して下さい</option>
-            <option value="">北海道</option>
-            <option value="">...</option>
-          </select>
-        </li>
-        <li>市区町村 ※：<input type="text" name="city" placeholder=""></li>
-        <li>住所1(番地) ※：<input type="text" name="address1"></li>
-        <li>住所2(建物名)：<input type="text" name="address2"></li>
-        <br>
-        <li>電話番号 ※：<input type="text" name="phone_number" placeholder="012-345-6789"></li>
-        <li>FAX番号：<input type="text" name="fax_number" placeholder="012-345-6789"></li>
-
-        <br>
-        <li>
+        <tr><td>電話番号 ※：</td><td><input type="text" name="phone_number" placeholder="012-345-6789"></td></tr>
+        <tr><td>FAX番号：</td><td><input type="text" name="fax_number" placeholder="012-345-6789"></td></tr>
+      </table>
+      <br>
+      <table>
+        <ul>
+          <li> 
           お問い合わせ項目 ※：<br>
-          <input type="radio" name="0">価格、納期などに関するご質問<br>
-          <input type="radio" name="1">技術的なご質問<br>
-          <input type="radio" name="2">その他のご質問<br>
-        </li>
-        <li>
+          <?php for($i=0; $i<count($aboutVals); $i++){ ?>
+          <input type="radio" name="about" value="<?= $aboutVals[$i]["value"]?>"><?= $aboutVals[$i]["text"]?><br>
+          <?php } ?>
+
+          </li>
+          <li> 
           お問い合わせ内容 ※：<br>
           <textarea type="text" name="naiyou" rows="7" cols="50"></textarea>
-        </li>
-        <li>
-          このサイトをどちらでお知りになられましたか？<br>
-            <input type="checkbox">サーチエンジン<br>
-            <input type="checkbox">他サイトからのリンク<br>
-            <input type="checkbox">新聞広告<br>
-            <input type="checkbox">雑誌広告<br>
-            <input type="checkbox">その他 <input type="text"><br>
-        </li>
-        <button>入力内容を確認</button>
-      </ul>
+
+          </li>
+          <li> 
+          このサイトをどちらでお知りになられましたか？(複数選択可)<br>
+          <?php for($i=0; $i<count($kikkakeKoumoku); $i++){ ?>
+          <input type="checkbox" name="know[]" value="<?= $kikkakeKoumoku[$i]["value"]?>"><?= $kikkakeKoumoku[$i]["text"]?>
+          <?php if($kikkakeKoumoku[$i]["value"] =="sonota") {?>
+          <input type="text" name="know_sonota">
+          <?php } ?>
+          <br>
+          <?php } ?>
+
+          </li>
+        </ul>
+      </table>
+      <button>入力内容を確認</button>
     </form>
     <p>
     <br> 
@@ -81,4 +99,5 @@
     <!-- メール送信<br>                                    -->
     </p>
   </body>
+        <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 </html>
