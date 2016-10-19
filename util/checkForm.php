@@ -2,6 +2,7 @@
 require_once(__DIR__."/"."var.php");
 require_once(__DIR__."/"."util.php");
 
+
 // $errors = [ "value"=>"person_furigana", "isError"=>true, "errorText"=>[
 //"値は◯◯でお願いします" 
 //] ]
@@ -79,16 +80,40 @@ function setError($p) {
   //[ ] 郵便番号の数字は正しいか
   // echo $p['zip1']," ", $p['zip2'];
   $zip1Wrong = !ctype_digit($p['zip1']) || strlen($p['zip1']) != 3;
+  $zip1Wrong = !preg_match('/\A\d{3,3}\z/',$p['zip1']);
   $zip2Wrong = !ctype_digit($p['zip2']) || strlen($p['zip2']) != 4;
+  $zip2Wrong = !preg_match('/\A\d{4,4}\z/',$p['zip2']);
 
   if($zip1Wrong || $zip2Wrong){
     $row = &getRow($result, "value","zip2");
     $row["isError"] = true;
     $row["errText"] = "郵便番号が正しくありません";
   }
-  //[ ] 郵便番号と、住所が正しいか
-  //todo csvとかやらないといけない
 
+  $zipFound = getByZip($p['zip1'].$p['zip2']);
+  //郵便番号
+  if($zipFound === false) {
+    $row = &getRow($result, "value","zip2");
+    $row["isError"] = true;
+    $row["errText"] = "郵便番号が存在しません";
+  }else {
+    //[ ] 郵便番号と、住所が正しいか
+    $getAddress = [ $zipFound[6],     $zipFound[7], $zipFound[8] ];
+    $pAddress   = [ $p['prefecture'], $p['city'], $p['address1'] ];
+    $equalPref = $getAddress[0] == $pAddress[0];
+    $equalCity = $getAddress[1] == $pAddress[1];
+
+    $length = mb_strlen($getAddress[2]);
+    $equalAddr = ($getAddress[2] == mb_substr($pAddress[2], 0, $length));
+    echo "<pre>";
+    echo "</pre>";
+    if(!$equalPref || !$equalCity || !$equalAddr) {
+      $row = &getRow($result, "value","zip2");
+      $row["isError"] = true;
+      $row["errText"] = "郵便番号と住所が一致しません";
+    }
+  }
+  
   //[ ] 電話番号,faxの数字は正しいか
   $isPhoneWrong = !isPhoneNumber($p['phone_number']);
   $isFaxWrong   = !isPhoneNumber($p['fax_number']);

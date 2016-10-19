@@ -53,7 +53,6 @@ function sendToDb($rows){
   }
   $sql .= ' );';
 
-  print_r($sql);
   $pdo = getPdo();
   $sta = $pdo->query($sql);
 
@@ -79,8 +78,14 @@ function getPdo(){
   }
 }
 
-//tryで
-sendToDb($dbRow);
+
+$isSent = false;
+if(!$_SESSION['sent']) {
+  //tryで
+  sendToDb($dbRow);
+  $isSent = true;
+  $_SESSION['sent'] = true;
+}
 
 function getTable($table){
   $pdo = getPdo();
@@ -102,7 +107,11 @@ echo '</pre>';
   <title></title>
 </head>
 <body>
+  <?php if($isSent) { ?>
   送信されました。ありがとうございました。
+  <?php }else{ ?>
+  再度読込
+  <?php } ?>
   <a href="index.php">フォームへ戻る</a>
 
 </body>

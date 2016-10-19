@@ -1,5 +1,6 @@
 <?php
 require_once(__DIR__."/"."var.php");
+require_once(__DIR__."/"."csv.php");
 
 //func
 function findRow($rows, $key,$value) {

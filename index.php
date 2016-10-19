@@ -1,5 +1,6 @@
 <?php
 session_start();
+session_unset();
 require_once(__DIR__ . "/"."util/util.php");
 //$aboutVals
 //$kikkakeKoumoku

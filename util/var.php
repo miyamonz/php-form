@@ -49,6 +49,6 @@ $correctValues = [
 ["value" => "about",           "text" => "お問い合わせ項目", "must"                           => true ],
 ["value" => "naiyou",          "text" => "お問い合わせ内容", "must"                           => true ],
 
-["value" => "know",            "text" => "このサイトをどちらでお尻になられましたか？", "must" => false ] ,
+["value" => "know",            "text" => "このサイトをどちらでお知りになられましたか？", "must" => false ] ,
 ["value" => "know_sonota",     "text" => "", "must"                                     => false ],
 ];
