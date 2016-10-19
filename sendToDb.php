@@ -41,18 +41,19 @@ function sendToDb($rows){
   $keys = array_keys($rows);
   $sql = 'insert into form_receive ';
   $sql .= '(';
-  foreach ($keys as $k) {
+  foreach ($keys as $i => $k) {
     $sql .= " ".$k." ";
-    if($k !== end($keys)) $sql .= ", \n";
+    if($i < count($keys)-1) $sql .= ", \n";
   }
   $sql .= ' )';
   $sql .= ' values (';
-  foreach ($keys as $k) {
+  foreach ($keys as $i => $k) {
     $sql .= " '".$rows[$k]."'";
-    if($k !== end($keys)) $sql .= ", \n";
+    if($i < count($keys)-1) $sql .= ", \n";
   }
   $sql .= ' );';
 
+  print_r($sql);
   $pdo = getPdo();
   $sta = $pdo->query($sql);
 
