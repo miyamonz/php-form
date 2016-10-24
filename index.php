@@ -88,7 +88,7 @@ require_once(__DIR__ . "/"."util/util.php");
           </li>
         </ul>
       </table>
-      <button>入力内容を確認</button>
+      <button id="sendButton">入力内容を確認</button>
     </form>
     <p>
     <br> 
@@ -100,5 +100,9 @@ require_once(__DIR__ . "/"."util/util.php");
     <!-- メール送信<br>                                    -->
     </p>
   </body>
-        <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
+
+  <script src="./util/jquery-3.1.1.min.js"></script>
+  <script src="./util/csv.js"></script>
+  <script src="./main.js"></script>
+  <script src="https://yubinbango.github.io/yubinbango/yubinbango.js" charset="UTF-8"></script>
 </html>
