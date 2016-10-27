@@ -19,27 +19,36 @@ require_once(__DIR__ . "/"."util/util.php");
       <table>
         <tr><td>名前 ※</td><td><input type="text" name="person_name"></td></tr>
         <tr><td>ふりがな ※</td><td><input type="text" name="person_furigana"></td></tr>
-        <tr><td>メールアドレス ※</td><td><input type="text" name="email1"></td></tr>
-        <tr><td>メールアドレス(確認) ※</td><td><input type="text" name="email2"></td></tr>
+        <tr><td>メールアドレス ※</td><td><input type="email" name="email1"></td></tr>
+        <tr><td>メールアドレス(確認) ※</td><td><input type="email" name="email2"></td></tr>
         <tr><td>会社名 ※</td><td><input type="text" name="company_name"></td></tr>
         <tr><td>役職</td>
           <td>
             <select name="company_pos">
-              <option value="">...</option>
+              <?php $list = $company_pos;
+              for($i=0; $i<count($list); $i++){
+              echo "<option value='" ,$list[$i]['value'],"'>",$list[$i]['text'],"</option>";
+              } ?>
             </select>
           </td>
         </tr>
         <tr><td>業種</td>
           <td>
             <select name="company_business">
-              <option value="">...</option>
+              <?php $list = $company_business;
+              for($i=0; $i<count($list); $i++){
+              echo "<option value='" ,$list[$i]['value'],"'>",$list[$i]['text'],"</option>";
+              } ?>
             </select>
           </td>
         </tr>
         <tr><td>職種</td>
           <td>
             <select name="job_category">
-              <option value="">...</option>
+              <?php $list = $job_category;
+              for($i=0; $i<count($list); $i++){
+              echo "<option value='" ,$list[$i]['value'],"'>",$list[$i]['text'],"</option>";
+              } ?>
             </select>
           </td>
         </tr>

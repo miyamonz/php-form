@@ -80,6 +80,11 @@ addValidation("person_furigana","ひらがなを入力して下さい", function
   if (val.match(/^[\u3040-\u309F]+$/)) return true;
   else  return false;
 });
+addValidation("email1", "メールアドレスが正しくありません", function(val){
+  var pattern = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+  if(val.match(pattern)) return true;
+  else return false;
+});
 addValidation("email2", "メールアドレスが一致しません", function(val){
   var $email1 = $('*[name=email1]');
   if($email1.val() == val) return true;

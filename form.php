@@ -26,6 +26,8 @@ function hasAnotherKey($p){
   return false;
 }
 
+//escape
+$_POST = es($_POST);
 // postの値からerrorを抽出
 //checked = [ value must isError errText ]
 $checked = setError($_POST);

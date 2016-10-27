@@ -1,5 +1,33 @@
 <?php
 //index.php
+$company_pos = [
+  ["value"=> "not_select",      "text" => "(未選択)"],
+  ["value"=> "management",      "text" => "経営者、役員"],
+  ["value"=> "general_manager", "text" => "部長"],
+  ["value"=> "manager",         "text" => "課長"],
+  ["value"=> "chief",           "text" => "係長"],
+  ["value"=> "general_staff",   "text" => "一般社員"],
+  ["value"=> "other",           "text" => "その他"],
+];
+$company_business = [
+  ["value"=> "not_select", "text" => "(未選択)"],
+  ["value"=> "trading",    "text" => "商社"],
+  ["value"=> "retail",     "text" => "小売"],
+  ["value"=> "school",     "text" => "大学、学校"],
+  ["value"=> "food",       "text" => "食品"],
+  ["value"=> "electric",   "text" => "電機"],
+  ["value"=> "other",      "text" => "その他"],
+];
+$job_category = [
+  ["value"=> "not_select", "text" => "(未選択)"],
+  ["value"=> "management", "text" => "経営"],
+  ["value"=> "design",     "text" => "設計"],
+  ["value"=> "technology", "text" => "技術"],
+  ["value"=> "manufactur", "text" => "製造"],
+  ["value"=> "sales",      "text" => "営業"],
+  ["value"=> "student",    "text" => "学生"],
+  ["value"=> "other",      "text" => "その他"],
+];
 $aboutVals = [
   ["value" => "kakaku",  "text" => "価格、納期に関するご質問" ],
   ["value" => "gijutsu", "text" => "技術的な質問" ],
